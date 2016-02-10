@@ -3,25 +3,37 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <title>My first mobile app</title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+      <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
+    
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/routes.js"></script>
     <script src="js/services.js"></script>
-    <script src="js/directives.js"></script>
-<script src="http://debug-software.intel.com/target/target-script-min.js#Vmp50YWyXn5oRJgFtADNHTE_BfqSPC35DH0blfMycI8"></script>
+    <script src="js/directives.js"></script> 
+      
+        <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    
   </head>
+    
+    
+    
   <body ng-app="app" animation="slide-left-right-ios7">
   <div>
     <div>
