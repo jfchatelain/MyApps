@@ -42,6 +42,7 @@ var locateMe = function(myScope, getCurrentPosition){
                    marker.addTo(markers).bindPopup("You are here!").openPopup();                 
                    accuracyShape = L.circle([lat, lng], accuracy);
                    accuracyShape.addTo(markers);
+                  
               } 
           else{ 
               markers.clearLayers();
@@ -67,14 +68,13 @@ angular.module('app.controllers',  [])
 //     $scope.refresh = function() {locateMe($scope, getCurrentPosition);};
 })
    
-.controller('myChannelCtrl', function($rootScope, $scope, $location, PubNub, getCurrentSettings) {
-    
-    
+.controller('myChannelCtrl',  function($rootScope, $scope, $location, $cordovaLocalNotification, PubNub, getCurrentSettings) { 
     
      // make up a user id (you probably already have this)
-      $scope.userId   =  getCurrentSettings.data.getUsername(getCurrentSettings.data.username);
+      getCurrentSettings.data.username =  getCurrentSettings.data.getUsername(getCurrentSettings.data.username);
+      $scope.userId   = getCurrentSettings.data.username;
       // make up a channel name
-      $scope.channel  = 'Channel-kshb8wbnq';
+      $scope.channel  = 'Channel-z6d5fdjji';
       // pre-populate any existing messages (just an AngularJS scope object)
       $scope.messages = ['Welcome to our private chat room']; 
     
@@ -112,7 +112,7 @@ angular.module('app.controllers',  [])
   // Register for message events
   $rootScope.$on(PubNub.ngMsgEv($scope.channel), function(ngEvent, payload) {
     $scope.$apply(function() {
-      $scope.messages.push(payload.message);
+      $scope.messages.push(payload.message); 
     });
   });
     
