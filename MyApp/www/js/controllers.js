@@ -83,8 +83,7 @@ angular.module('app.controllers', [])
     
     $scope.onChange = function(checked)
     {
-         getCurrentSettings.data.autoRefreshLocation = checked;
-        console.log(checked);
+        getCurrentSettings.data.autoRefreshLocation = checked;
         if (checked)
         {
             locateMe($scope, getCurrentPosition);
