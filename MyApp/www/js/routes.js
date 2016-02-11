@@ -60,7 +60,7 @@ angular.module('app.routes', [])
       url: '/page5',
       views: {
         'side-menu21': {
-          templateUrl: 'templates/config.html',
+          templateUrl: 'templates/Config.html',
           controller: 'myConfigCtrl'
         }
       }
