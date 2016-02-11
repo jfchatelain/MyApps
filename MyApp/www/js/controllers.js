@@ -19,7 +19,7 @@ var myWeather = function (myScope, getCurrentPosition,getWeather) {
 var map = null;
 var accuracyShape = null;
 var marker = null;
-var markers =  new L.LayerGroup();
+var markers =  new L.LayerGroup();  
 
 var locateMe = function(myScope, getCurrentPosition){
       getCurrentPosition(function (position) { 
@@ -56,7 +56,7 @@ var locateMe = function(myScope, getCurrentPosition){
     }); 
 }
 
-angular.module('app.controllers', [])
+angular.module('app.controllers',  [])
 .controller('weatherCtrl', [ '$scope', 'getCurrentPosition', 'getWeather', function($scope, getCurrentPosition, getWeather) {
     myWeather($scope, getCurrentPosition, getWeather);
      $scope.refresh =   function() { myWeather($scope, getCurrentPosition,getWeather);} ;
@@ -67,12 +67,83 @@ angular.module('app.controllers', [])
 //     $scope.refresh = function() {locateMe($scope, getCurrentPosition);};
 })
    
-.controller('myChannelCtrl', function($scope) {
-
+.controller('myChannelCtrl', function($rootScope, $scope, $location, PubNub, getCurrentSettings) {
+    
+    
+    
+     // make up a user id (you probably already have this)
+      $scope.userId   =  getCurrentSettings.data.getUsername(getCurrentSettings.data.username);
+      // make up a channel name
+      $scope.channel  = 'Channel-kshb8wbnq';
+      // pre-populate any existing messages (just an AngularJS scope object)
+      $scope.messages = ['Welcome to our private chat room']; 
+    
+    try
+    {
+        if (!$rootScope.initialized) {
+            // Initialize the PubNub service
+            PubNub.init({
+             publish_key: 'pub-c-a2f0b1a5-de0a-4bab-9c1c-711a74a9e66f',
+             subscribe_key: 'sub-c-645b81cc-cfa4-11e5-b684-02ee2ddab7fe',
+              uuid:$scope.userId
+            });
+            $rootScope.initialized = true;
+          }
+    }
+    catch(e)
+        {
+            console.log(e);
+        }
+    
+ 
+    
+      // Subscribe to the Channel
+  PubNub.ngSubscribe({ channel: $scope.channel });
+    
+  $scope.publish = function(msg) {
+    PubNub.ngPublish({
+        
+      channel: $scope.channel,
+      message: "[" + $scope.userId + "] " + msg
+    });
+    $scope.myMessage = '';
+  };
+    
+  // Register for message events
+  $rootScope.$on(PubNub.ngMsgEv($scope.channel), function(ngEvent, payload) {
+    $scope.$apply(function() {
+      $scope.messages.push(payload.message);
+    });
+  });
+    
+    
+  // Register for presence events (optional)
+  $rootScope.$on(PubNub.ngPrsEv($scope.channel), function(ngEvent, payload) {
+    $scope.$apply(function() {
+      $scope.users = PubNub.ngListPresence($scope.channel);
+    });
+  });
+    
+  // Pre-Populate the user list (optional)
+  PubNub.ngHereNow({
+    channel: $scope.channel
+  });
+  
+  // Populate message history (optional)
+  PubNub.ngHistory({
+    channel: $scope.channel,
+    count: 500
+  });
+    
+    
+    
 })
    
-.controller('loginCtrl', function($scope) {
-    // $scope.username = 'test';
+.controller('loginCtrl', function($scope, getCurrentSettings) {
+    
+    $scope.setUserName = function(username){
+           getCurrentSettings.data.username = username;
+    }
 })
    
 .controller('signupCtrl', function($scope) {
@@ -92,4 +163,5 @@ angular.module('app.controllers', [])
    
 })//
 
+  
  

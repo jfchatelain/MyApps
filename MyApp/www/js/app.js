@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.routes', 'app.services', 'app.directives','app.services.Forecast', 'app.services.Geolocation','configurations.service'])
+angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.routes', 'app.services', 'app.directives','app.services.Forecast', 'app.services.Geolocation','configurations.service', 'pubnub.angular.service' ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,6 +17,7 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.routes', 'a
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
-    }
+    } 
   });
-})
+});
+ 

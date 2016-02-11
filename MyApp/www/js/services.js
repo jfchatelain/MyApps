@@ -4,7 +4,16 @@ angular.module('configurations.service', [])
 .factory('getCurrentSettings', function (){
     return {
         data: {
-            autoRefreshLocation: false
+            autoRefreshLocation: false,
+            username: null,
+            getUsername: function(username){
+                if (!username){
+                    return "User " + Math.round(Math.random() * 1000);
+                }
+                
+                return username;
+                
+            }
         }
     }
 });
@@ -44,9 +53,6 @@ angular.module('app.services.Geolocation', ['configurations.service'])
                                 }
                       });
               }
-    
-       
-       
     };
  
 });
@@ -66,5 +72,6 @@ angular.module('app.services.Forecast', [])
             });
     };
 });
+
 
  

@@ -1,3 +1,29 @@
 <ion-view title="My Channel">
-    <ion-content overflow-scroll="true" padding="true" class="has-header"></ion-content>
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+    
+        <h4>Online Users</h4>
+        <ul>
+          <li ng-repeat="user in users">{{user}}</li>
+        </ul>
+        
+        <h4>Chat Messages {{messages.length}}</h4>
+         
+     
+            
+         <div class="item item-input-inset">
+            <label class="item-input-wrapper"> 
+                <input type="text" ng-model="myMessage" />
+            </label>
+         <input type="submit" value="Send" class="button button-small" ng-click="publish(myMessage)"/>
+
+
+         </div> 
+        
+           <div >
+        <ul><li ng-repeat="message in messages">{{message}}</li></ul>
+        </div>
+    
+        
+     
+    </ion-content>
 </ion-view>
