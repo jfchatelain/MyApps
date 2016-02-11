@@ -12,14 +12,11 @@ var myWeather = function (myScope, getCurrentPosition,getWeather) {
                    myScope.IconId = data.weather[0].icon;
                    myScope.Temperature = data.main.temp;
                    myScope.Time = Date.now();
-                   myScope.WindSpeed = data.wind.speed;         
-                  
-                   console.log('Weather retreived')
-
-               });
-
+                   myScope.WindSpeed = data.wind.speed;    
+                   console.log('Weather retreived') 
+               }); 
         });
-}
+} 
 
 var map = null;
 var accuracyShape = null;
@@ -70,7 +67,7 @@ angular.module('app.controllers', [])
    
 .controller('myLocationCtrl',   function($scope, getCurrentPosition) {    
   locateMe($scope, getCurrentPosition);
-     $scope.refresh = function() {locateMe($scope, getCurrentPosition);};
+//     $scope.refresh = function() {locateMe($scope, getCurrentPosition);};
 })
    
 .controller('myChannelCtrl', function($scope) {
@@ -82,6 +79,10 @@ angular.module('app.controllers', [])
 })
    
 .controller('signupCtrl', function($scope) {
+
+})//
+
+.controller('myConfigCtrl', function($scope) {
 
 })//
 

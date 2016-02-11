@@ -56,6 +56,16 @@ angular.module('app.routes', [])
       }
     })
         
+   .state('menu.Config', {
+      url: '/page5',
+      views: {
+        'side-menu21': {
+          templateUrl: 'templates/config.html',
+          controller: 'myConfigCtrl'
+        }
+      }
+    })
+        
       
     
       

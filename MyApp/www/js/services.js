@@ -1,29 +1,38 @@
-angular.module('app.services',[]); 
+angular.module('app.services',['ngCordova']); 
  
-//
-angular.module('app.services.Cordova', [])
-.factory('deviceReady', function () {
-//    return function (done) {
-//        if (typeof window.cordova === 'object') {
-//            document.addEventListener('deviceready', function () { 
-//                done();
-//            }, false);
-//        } else {
-//            done();
-//
-//        }
-//    };
-});
-
+ 
 angular.module('app.services.Geolocation', []) 
-.factory('getCurrentPosition', function () {
+.factory('getCurrentPosition', function ($cordovaGeolocation) {
     return function (done) { 
-            navigator.geolocation.getCurrentPosition(function (position) {                 
-                    done(position);
-                
-            }, function (error) {                
-                    throw new Error('Unable to retreive position');
+        
+        
+        var posOptions = {timeout: 10000, enableHighAccuracy: true};
+        
+        $cordovaGeolocation.getCurrentPosition(posOptions)
+            .then(function (position) {
+               done(position);
+            }, function(err) {
+              throw new Error('Unable to retreive position');
             });
+        
+       
+
+  var watchOptions = {
+    timeout : 3000,
+    enableHighAccuracy: false // may cause errors if true
+  };
+
+  var watch = $cordovaGeolocation.watchPosition(watchOptions);
+  watch.then(
+    null,
+    function(err) {
+      // error
+    },
+    function(position) {
+     done(position);
+  });
+        
+          
     };
  
 });
