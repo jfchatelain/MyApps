@@ -21,6 +21,46 @@ var myWeather = function (myScope, getCurrentPosition,getWeather) {
         });
 }
 
+var map = null;
+var accuracyShape = null;
+var marker = null;
+var markers =  new L.LayerGroup();
+
+var locateMe = function(myScope, getCurrentPosition){
+      getCurrentPosition(function (position) { 
+          
+        var lat =  position.coords.latitude;
+        var lng =  position.coords.longitude;
+        var accuracy =   position.coords.accuracy;
+          
+          if (!map)
+              {              
+                   // set map here
+                   map = L.map('map');
+                   map.setView([lat, lng], 13);
+                   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                       maxZoom: 18
+                   }).addTo(map); 
+                    markers.addTo(map);
+                    marker = L.marker([lat, lng]);
+                   marker.addTo(markers).bindPopup("You are here!").openPopup();                 
+                   accuracyShape = L.circle([lat, lng], accuracy);
+                   accuracyShape.addTo(markers);
+              } 
+          else{
+              console.log('clearing layers');
+              markers.clearLayers();
+                 var newLatLng = new L.LatLng(lat, lng);
+                marker.setLatLng(newLatLng);
+               accuracyShape = L.circle([lat, lng], accuracy);
+                   accuracyShape.addTo(markers);
+               map.panTo(newLatLng, 13);
+          }
+          
+    }); 
+}
+
 angular.module('app.controllers', [])
 .controller('weatherCtrl', [ '$scope', 'getCurrentPosition', 'getWeather', function($scope, getCurrentPosition, getWeather) {
     myWeather($scope, getCurrentPosition, getWeather);
@@ -28,24 +68,8 @@ angular.module('app.controllers', [])
 }])
    
 .controller('myLocationCtrl',   function($scope, getCurrentPosition) {    
-    getCurrentPosition(function (position) {
-           
-            var lat =  position.coords.latitude;
-           var lng =  position.coords.longitude;
-            var accuracy =   position.coords.accuracy;
-
-           // set map here
-           var map = L.map('map').setView([lat, lng], 13);
-           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-               attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-               maxZoom: 18
-           }).addTo(map);
-
-           L.marker([lat, lng]).addTo(map).bindPopup("You are here!").openPopup();
-           L.circle([lat, lng], accuracy).addTo(map);
-     
-    
-    }); 
+  locateMe($scope, getCurrentPosition);
+     $scope.refresh = function() {locateMe($scope, getCurrentPosition);};
 })
    
 .controller('myChannelCtrl', function($scope) {
