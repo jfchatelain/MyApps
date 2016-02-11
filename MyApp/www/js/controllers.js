@@ -1,5 +1,3 @@
- 
-
 var myWeather = function (myScope, getCurrentPosition,getWeather) { 
       getCurrentPosition(function (position) {
             getWeather(
@@ -17,7 +15,7 @@ var myWeather = function (myScope, getCurrentPosition,getWeather) {
                }); 
         });
 } 
-
+ 
 var map = null;
 var accuracyShape = null;
 var marker = null;
@@ -45,8 +43,7 @@ var locateMe = function(myScope, getCurrentPosition){
                    accuracyShape = L.circle([lat, lng], accuracy);
                    accuracyShape.addTo(markers);
               } 
-          else{
-              console.log('clearing layers');
+          else{ 
               markers.clearLayers();
                  var newLatLng = new L.LatLng(lat, lng);
                 marker.setLatLng(newLatLng);
@@ -80,10 +77,20 @@ angular.module('app.controllers', [])
    
 .controller('signupCtrl', function($scope) {
 
-})//
+})// 
 
-.controller('myConfigCtrl', function($scope) {
-
+.controller('myConfigCtrl',  function($scope, getCurrentSettings, getCurrentPosition) {  
+    
+    $scope.onChange = function(checked)
+    {
+         getCurrentSettings.data.autoRefreshLocation = checked;
+        console.log(checked);
+        if (checked)
+        {
+            locateMe($scope, getCurrentPosition);
+        }
+    }
+   
 })//
 
  
