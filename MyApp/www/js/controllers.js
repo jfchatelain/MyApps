@@ -55,6 +55,7 @@ var locateMe = function(myScope, getCurrentPosition){
                 marker.setLatLng(newLatLng);
                accuracyShape = L.circle([lat, lng], accuracy);
                    accuracyShape.addTo(markers);
+              marker.addTo(markers);
                map.panTo(newLatLng, 13);
           }
           
