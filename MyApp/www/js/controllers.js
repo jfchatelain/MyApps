@@ -112,18 +112,28 @@ angular.module('app.controllers',  [])
   // Register for message events
   $rootScope.$on(PubNub.ngMsgEv($scope.channel), function(ngEvent, payload) {
     $scope.$apply(function() {
-      $scope.messages.push(payload.message); 
+        $scope.messages.push(payload.message); 
         
-        $cordovaLocalNotification.schedule({
-        id: 1,
-        title: 'Title here',
-        text: 'Text here',
-        data: {
-          customProperty: 'custom value'
-        }
-      }).then(function (result) {
-        // ...
-      });
+        try
+            {
+                  $cordovaLocalNotification.schedule({
+                    id: 1,
+                    title: 'Title here',
+                    text: 'Text here',
+                    data: {
+                      customProperty: 'custom value'
+                    }
+                  }).then(function (result) {
+                    console.log(result);
+                      console.log("Notification success");
+                  });
+            }
+                          
+        catch(e)
+            {
+                console.log("Error: " + e)
+            }
+      
         
         
         
