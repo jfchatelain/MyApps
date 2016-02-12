@@ -74,7 +74,7 @@ angular.module('app.controllers',  [])
       getCurrentSettings.data.username =  getCurrentSettings.data.getUsername(getCurrentSettings.data.username);
       $scope.userId   = getCurrentSettings.data.username;
       // make up a channel name
-      $scope.channel  = 'Channel-z6d5fdjji';
+      $scope.channel  = 'Channel-s6n602zsa';
       // pre-populate any existing messages (just an AngularJS scope object)
       $scope.messages = ['Welcome to our private chat room']; 
     
@@ -113,6 +113,20 @@ angular.module('app.controllers',  [])
   $rootScope.$on(PubNub.ngMsgEv($scope.channel), function(ngEvent, payload) {
     $scope.$apply(function() {
       $scope.messages.push(payload.message); 
+        
+        $cordovaLocalNotification.schedule({
+        id: 1,
+        title: 'Title here',
+        text: 'Text here',
+        data: {
+          customProperty: 'custom value'
+        }
+      }).then(function (result) {
+        // ...
+      });
+        
+        
+        
     });
   });
     
