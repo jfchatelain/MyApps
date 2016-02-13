@@ -70,6 +70,7 @@ angular.module('app.controllers',  [])
    
 .controller('myChannelCtrl',  function($rootScope, $scope, $location, $cordovaLocalNotification, PubNub, getCurrentSettings) { 
     
+   
      // make up a user id (you probably already have this)
       getCurrentSettings.data.username =  getCurrentSettings.data.getUsername(getCurrentSettings.data.username);
       $scope.userId   = getCurrentSettings.data.username;
@@ -116,17 +117,7 @@ angular.module('app.controllers',  [])
         
         try
             {
-                  $cordovaLocalNotification.schedule({
-                    id: 1,
-                    title: 'Title here',
-                    text: 'Text here',
-                    data: {
-                      customProperty: 'custom value'
-                    }
-                  }).then(function (result) {
-                    console.log(result);
-                      console.log("Notification success");
-                  });
+                  $cordovaLocalNotification.add({ message: "You got a new message "});
             }
                           
         catch(e)
