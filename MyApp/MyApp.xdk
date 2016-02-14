@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "7f7d4cdb-9afb-42b7-a545-705d2ecbedc0",
-      "lastModifiedDate": 1455125511610,
+      "lastModifiedDate": 1455482326910,
       "creationDate": 1455125510632
     },
     "sourceDirectory": "www",
@@ -45,7 +45,8 @@
         "description": "Cordova Console Plugin",
         "data": {},
         "dependedBy": [],
-        "custom": "true"
+        "custom": "true",
+        "cordovaVersion": ">=3.6.0"
       },
       {
         "id": "cordova-plugin-device",
@@ -63,7 +64,8 @@
         "permissions": {},
         "description": "Cordova Device Plugin",
         "data": {},
-        "dependedBy": []
+        "dependedBy": [],
+        "cordovaVersion": ">=3.6.0"
       },
       {
         "id": "cordova-plugin-splashscreen",
@@ -81,7 +83,8 @@
         "permissions": {},
         "description": "Cordova Splashscreen Plugin",
         "data": {},
-        "dependedBy": []
+        "dependedBy": [],
+        "cordovaVersion": ">=3.6.0"
       },
       {
         "id": "cordova-plugin-statusbar",
@@ -135,9 +138,79 @@
         "checksum": "363a5382",
         "dependsOn": [],
         "topLevel": true,
-        "cordovaVersion": ">=3.0.0",
+        "cordovaVersion": ">=3.6.0",
         "permissions": {},
         "description": "Ionic Keyboard Plugin",
+        "data": {},
+        "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-app-event",
+        "name": "Application Events",
+        "version": "1.1.0",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-app-event",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-app-event",
+        "selectedState": "Included",
+        "checksum": "fb7c2da7",
+        "dependsOn": [],
+        "topLevel": false,
+        "cordovaVersion": ">=3.6.0",
+        "author": "Sebastián Katzer",
+        "permissions": {},
+        "description": "Broadcasts various events to make them available for 3rd parties",
+        "data": {},
+        "dependedBy": [],
+        "custom": "true"
+      },
+      {
+        "id": "de.appplant.cordova.plugin.local-notification",
+        "name": "LocalNotification",
+        "version": "0.8.4",
+        "originType": "repo",
+        "origin": "https://github.com/katzer/cordova-plugin-local-notifications.git",
+        "gitref": "",
+        "subdir": ".",
+        "paramvals": {},
+        "sourceLocation": "plugins/de.appplant.cordova.plugin.local-notification",
+        "selectedState": "Included",
+        "checksum": "9f3812e4",
+        "dependsOn": [],
+        "topLevel": true,
+        "cordovaVersion": ">=3.6.0",
+        "author": "Sebastián Katzer",
+        "permissions": {
+          "android:name": [
+            "android.permission.RECEIVE_BOOT_COMPLETED",
+            "android.permission.WRITE_EXTERNAL_STORAGE"
+          ]
+        },
+        "description": "The plugin supports scheduling local notifications in various ways with a single interface. It also allows you to update, clear or cancel them. There are different interfaces to query for local notifications and a complete set of events to hook into the life cycle of local notifications. To get a deep overview we recommend to read about all the topics in our wiki and try out the Kitchen Sink App",
+        "data": {},
+        "dependedBy": []
+      },
+      {
+        "id": "phonegap-facebook-plugin",
+        "name": "Facebook Connect",
+        "version": "0.12.0",
+        "originType": "repo",
+        "origin": "https://github.com/Wizcorp/phonegap-facebook-plugin.git",
+        "gitref": "",
+        "subdir": ".",
+        "paramvals": {
+          "APP_ID": "4851672833",
+          "APP_NAME": "LocateME"
+        },
+        "sourceLocation": "plugins/phonegap-facebook-plugin",
+        "selectedState": "Included",
+        "checksum": "5158898",
+        "dependsOn": [],
+        "topLevel": true,
+        "cordovaVersion": ">=3.5.0",
+        "permissions": {},
+        "description": "\r\n      This is the official plugin for Facebook in Apache Cordova/PhoneGap!\r\n      \r\n      The Facebook plugin for Apache Cordova allows you to use the same JavaScript code in your\r\n      Cordova application as you use in your web application.\r\n      Docs: https://github.com/Wizcorp/phonegap-facebook-plugin.\r\n    ",
         "data": {},
         "dependedBy": []
       }

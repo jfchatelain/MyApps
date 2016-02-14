@@ -154,10 +154,28 @@ angular.module('app.controllers',  [])
     
 })
    
-.controller('loginCtrl', function($scope, getCurrentSettings) {
+.controller('loginCtrl', function($scope, getCurrentSettings, $cordovaFacebook) {
+    
+//     var appID = 4851672833;
+//      var version = "v2.0"; // or leave blank and default is v2.0
+//      $cordovaFacebookProvider.browserInit(appID, version);
     
     $scope.setUserName = function(username){
            getCurrentSettings.data.username = username;
+    }
+    
+    $scope.facebookLogin = function()
+    {
+         $cordovaFacebook.login(["public_profile", "email", "user_friends"])
+        .then(function(success) {
+          // { id: "634565435",
+          //   lastName: "bob"
+          //   ...
+          // }
+        }, function (error) {
+          // error
+        });
+
     }
 })
    
